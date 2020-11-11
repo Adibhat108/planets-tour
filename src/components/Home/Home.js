@@ -1,9 +1,8 @@
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable linebreak-style */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -61,18 +60,18 @@ const Home = ({ classes }) => {
       .then((res) => {
         setLoading(false);
         if (res.status === 200) {
-          console.log('TOKEN FOUND SUCCESSFULLY!!');
+          // console.log('TOKEN FOUND SUCCESSFULLY!!');
           return res.json();
         }
         return res;
       })
       .then((res) => {
         setAuth(res);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         setLoading(false);
-        console.error(err);
+        // console.error(err);
       });
     setLoading(true);
     fetch(`${urls.apiURL}/planets`,
@@ -99,7 +98,7 @@ const Home = ({ classes }) => {
       })
       .catch((err) => {
         setLoading(false);
-        console.error('Error while fetching planets', err);
+        // console.error('Error while fetching planets', err);
       });
     setLoading(true);
     fetch(`${urls.apiURL}/vehicles`,
@@ -143,13 +142,13 @@ const Home = ({ classes }) => {
             countTracker += 1;
           }
         });
-        console.log('after array processing...........');
-        console.log(newNewRes);
+        // console.log('after array processing...........');
+        // console.log(newNewRes);
         setVehicleList(newNewRes);
       })
       .catch((err) => {
         setLoading(false);
-        console.error('Error while fetching planets', err);
+        // console.error('Error while fetching planets', err);
       });
   }, []);
 
@@ -176,7 +175,7 @@ const Home = ({ classes }) => {
         .then((res) => {
           setLoading(false);
           if (res.status === 200) {
-            console.log('search for planets complete with 200 response');
+            // console.log('search for planets complete with 200 response');
             return res.json();
           }
           return res;
@@ -184,11 +183,11 @@ const Home = ({ classes }) => {
         .then((res) => {
           setResult(res);
           alert(res.status === 'success' ? `Falcone found at ${res.planet_name}` : 'Not found. Better luck next time!');
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           setLoading(false);
-          console.error(err);
+          // console.error(err);
         });
     }
   };
@@ -212,7 +211,7 @@ const Home = ({ classes }) => {
 
                   const vehiclelistTemp = [...vehicleList];
                   const selectedOne = vehiclelistTemp.find((vehi) => vehi.position === tourId);
-                  console.log(selectedOne);
+                  // console.log(selectedOne);
                   if (selectedOne) {
                     selectedOne.position = '';
                     vehiclelistTemp[selectedOne.id] = selectedOne;
@@ -245,7 +244,7 @@ const Home = ({ classes }) => {
 
                   const planetlistTemp = [...planetList];
                   const selectedOne = planetlistTemp.find((planet) => planet.position === tourId);
-                  console.log(selectedOne);
+                  // console.log(selectedOne);
                   if (selectedOne) {
                     selectedOne.position = '';
                     planetlistTemp[selectedOne.id] = selectedOne;

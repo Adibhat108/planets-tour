@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const PROTO = 'https';
 const HOST = 'findfalcone.herokuapp.com';
 
