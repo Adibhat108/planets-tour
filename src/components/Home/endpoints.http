@@ -1,0 +1,4 @@
+POST https://findfalcone.herokuapp.com/token HTTP/1.1
+Accept: 'application/json'{"token":"IoPpXoCbBdQvAhgddWTUxWzMJkvrnjNe","planet_names":["Donlon","Enchai","Jebing","Sapir"],"vehicle_names":["Space pod","Space pod","Space rocket","Space shuttle"]}
+###
+IoPpXoCbBdQvAhgddWTUxWzMJkvrnjNe
