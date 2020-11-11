@@ -253,7 +253,7 @@ const Home = ({ classes }) => {
                   planetlistTemp[newValue.id].position = tourId;
                   setPlanetList(planetlistTemp);
                 }}
-                id="planets-autocomplete"
+                key={`planets-autocomplete-${tourId}`}
                 options={planetList.filter((planet) => (planet.position === '' || planet.position === tourId))}
                 getOptionLabel={(option) => option.name}
                 style={{ width: 300 }}
