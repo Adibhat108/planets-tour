@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
@@ -219,7 +220,7 @@ const Home = ({ classes }) => {
                   vehiclelistTemp[newValue.id].position = tourId;
                   setVehicleList(vehiclelistTemp);
                 }}
-                id="vehicles-autocomplete"
+                key={`vehicles-autocomplete-${tourId}`}
                 options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId)}
                 getOptionLabel={(option) => (option.name)}
                 style={{ width: 300 }}
