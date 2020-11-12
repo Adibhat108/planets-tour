@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-alert */
@@ -21,11 +22,13 @@ import Loader from '../../reusables/Loader/Loader';
 import ThreeLoader from '../../reusables/ThreeLoader/ThreeLoader';
 import CLoader from '../../reusables/CLoader/CLoader';
 import Alert from '../../reusables/Alert/Alert';
+import { useAlert } from '../../hoc/hocdir/Alert/alert';
 
 const Home = ({ classes }) => {
   const [planetList, setPlanetList] = useState([]);
   const [vehicleList, setVehicleList] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const alert = useAlert();
   const [tourList, setTourList] = useState([{
     planet: {
       name: '',
@@ -42,6 +45,7 @@ const Home = ({ classes }) => {
   const [avaiPlanets, setAvaiPlanets] = useState([]);
   const [auth, setAuth] = useState({});
   const [result, setResult] = useState({});
+  const [totalTime, setTotalTime] = useState(0);
   // const [selectedVehicles, setSelectedVehicles] = useState([]);
 
   useEffect(() => {
@@ -108,6 +112,7 @@ const Home = ({ classes }) => {
       })
       .then((res) => {
         setLoading(false);
+        // alert.success('All vehicles fetched!');
         if (res.status === 200) {
           return res.json();
         }
@@ -189,6 +194,16 @@ const Home = ({ classes }) => {
         });
     }
   };
+
+  useEffect(() => {
+    const fullTime = tourList.reduce(
+      (acc, tourcurr) => acc + ((tourcurr.planet && tourcurr.vehicle)
+        ? (tourcurr.planet.distance / tourcurr.vehicle.speed) : 0), 0,
+    );
+    if (fullTime) {
+      setTotalTime(fullTime);
+    }
+  }, [tourList]);
 
   return (
     <Paper className={classes.paper}>
