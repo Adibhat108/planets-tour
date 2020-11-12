@@ -1,10 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable linebreak-style */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-alert */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
@@ -18,17 +11,17 @@ import AddIcon from '@material-ui/icons/Add';
 
 import urls from '../../urls';
 import styles from './Home.style';
-import Loader from '../../reusables/Loader/Loader';
-import ThreeLoader from '../../reusables/ThreeLoader/ThreeLoader';
+// import Loader from '../../reusables/Loader/Loader';
+// import ThreeLoader from '../../reusables/ThreeLoader/ThreeLoader';
+// import Alert from '../../reusables/Alert/Alert';
 import CLoader from '../../reusables/CLoader/CLoader';
-import Alert from '../../reusables/Alert/Alert';
 import { useAlert } from '../../hoc/hocdir/Alert/alert';
 
 const Home = ({ classes }) => {
   const [planetList, setPlanetList] = useState([]);
   const [vehicleList, setVehicleList] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const alert = useAlert();
+  const alert = useAlert();
   const [tourList, setTourList] = useState([{
     planet: {
       name: '',
@@ -41,11 +34,11 @@ const Home = ({ classes }) => {
       speed: 0,
     },
   }]);
-  const [selectedPlanets, setSelectedPlanets] = useState([]);
-  const [avaiPlanets, setAvaiPlanets] = useState([]);
   const [auth, setAuth] = useState({});
-  const [result, setResult] = useState({});
-  const [totalTime, setTotalTime] = useState(0);
+  // const [selectedPlanets, setSelectedPlanets] = useState([]);
+  // const [avaiPlanets, setAvaiPlanets] = useState([]);
+  // const [result, setResult] = useState({});
+  const [, setTotalTime] = useState(0);
   // const [selectedVehicles, setSelectedVehicles] = useState([]);
 
   useEffect(() => {
@@ -71,7 +64,7 @@ const Home = ({ classes }) => {
         setAuth(res);
         // console.log(res);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
         // console.error(err);
       });
@@ -98,7 +91,7 @@ const Home = ({ classes }) => {
         });
         setPlanetList(newRes);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
         // console.error('Error while fetching planets', err);
       });
@@ -149,7 +142,7 @@ const Home = ({ classes }) => {
         // console.log(newNewRes);
         setVehicleList(newNewRes);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
         // console.error('Error while fetching planets', err);
       });
@@ -184,11 +177,14 @@ const Home = ({ classes }) => {
           return res;
         })
         .then((res) => {
-          setResult(res);
-          alert(res.status === 'success' ? `Falcone found at ${res.planet_name}` : 'Not found. Better luck next time!');
+          // setResult(res);
+          alert.success(res.status === 'success' ? `Falcone found at ${res.planet_name}` : 'Not found. Better luck next time!');
+          // alert(res.status === 'success'
+          // ? `Falcone found at ${res.planet_name}` : 'Not found. Better luck next time!');
           // console.log(res);
         })
-        .catch((err) => {
+        .catch(() => {
+          alert.error('An error occured.');
           setLoading(false);
           // console.error(err);
         });
@@ -201,6 +197,7 @@ const Home = ({ classes }) => {
         ? (tourcurr.planet.distance / tourcurr.vehicle.speed) : 0), 0,
     );
     if (fullTime) {
+      // alert.success(`${fullTime}`);
       setTotalTime(fullTime);
     }
   }, [tourList]);
@@ -313,7 +310,7 @@ const Home = ({ classes }) => {
       </Grid>
       {/* <Loader size={24} style={{ display: 'none' }} /> */}
       <CLoader open={loading} />
-      {/* <Alert type="error" message="This is info" isDefaultShown /> */}
+      {/* <Alert type="info" message="This is info" isDefaultShown /> */}
     </Paper>
   );
 };
