@@ -4,6 +4,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Backdrop from '../Backdrop/Backdrop';
 import ThreeLoader from '../ThreeLoader/ThreeLoader';
+import FlapperSpinner from '../FlapperSpinner/FlapperSpinner';
 
 const rotate = keyframes`
   from {
@@ -34,7 +35,7 @@ const CLoader = ({
 }) => (
   <>
     <Backdrop open={open} />
-    {open ? <ThreeLoader /> : null}
+    {open ? <FlapperSpinner color="blue" /> : null}
   </>
 );
 

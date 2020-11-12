@@ -26,8 +26,6 @@ const Home = ({ classes }) => {
   const [planetList, setPlanetList] = useState([]);
   const [vehicleList, setVehicleList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [planetChosen, setPlanetChosen] = useState({});
-  const [vehicleChosen, setVehicleChosen] = useState({});
   const [tourList, setTourList] = useState([{
     planet: {
       name: '',
@@ -202,7 +200,7 @@ const Home = ({ classes }) => {
               <Autocomplete
                 value={tour.vehicle}
                 onChange={(event, newValue) => {
-                  setVehicleChosen(newValue);
+                  // setVehicleChosen(newValue);
                   const tempTour = { ...tour };
                   const tempTourList = [...tourList];
                   tempTour.vehicle = newValue;
@@ -216,7 +214,9 @@ const Home = ({ classes }) => {
                     selectedOne.position = '';
                     vehiclelistTemp[selectedOne.id] = selectedOne;
                   }
-                  vehiclelistTemp[newValue.id].position = tourId;
+                  if (newValue) {
+                    vehiclelistTemp[newValue.id].position = tourId;
+                  }
                   setVehicleList(vehiclelistTemp);
                 }}
                 key={`vehicles-autocomplete-${tourId}`}
@@ -235,7 +235,7 @@ const Home = ({ classes }) => {
               <Autocomplete
                 value={tour.planet}
                 onChange={(event, newValue) => {
-                  setPlanetChosen(newValue);
+                  // setPlanetChosen(newValue);
                   const tempTour = { ...tour };
                   const tempTourList = [...tourList];
                   tempTour.planet = newValue;
@@ -249,7 +249,9 @@ const Home = ({ classes }) => {
                     selectedOne.position = '';
                     planetlistTemp[selectedOne.id] = selectedOne;
                   }
-                  planetlistTemp[newValue.id].position = tourId;
+                  if (newValue) {
+                    planetlistTemp[newValue.id].position = tourId;
+                  }
                   setPlanetList(planetlistTemp);
                 }}
                 key={`planets-autocomplete-${tourId}`}
@@ -296,7 +298,7 @@ const Home = ({ classes }) => {
       </Grid>
       {/* <Loader size={24} style={{ display: 'none' }} /> */}
       <CLoader open={loading} />
-      {/* <Alert type="info" message="This is info" /> */}
+      {/* <Alert type="error" message="This is info" isDefaultShown /> */}
     </Paper>
   );
 };

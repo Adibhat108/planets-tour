@@ -11,7 +11,7 @@ export default (theme) => ({
   },
   paper: {
     padding: theme.spacing(1, 2, 1),
-    width: '100%',
+    // width: '100%',
   },
   closeButton: {
     position: 'absolute',
