@@ -98,11 +98,7 @@ AlertProvider.defaultProps = {
 };
 
 const useAlert = () => {
-  console.log('AlertActionContext............');
-  console.log(AlertActionContext);
   const context = useContext(AlertActionContext);
-  console.log('context............');
-  console.log(context);
   if (!context) {
     throw new Error('useAlert must be used within a AlertProvider');
   }

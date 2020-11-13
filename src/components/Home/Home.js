@@ -39,6 +39,7 @@ const Home = ({ classes }) => {
   // const [avaiPlanets, setAvaiPlanets] = useState([]);
   // const [result, setResult] = useState({});
   const [, setTotalTime] = useState(0);
+  const [lengthAlert, setLengthAlert] = useState(false);
   // const [selectedVehicles, setSelectedVehicles] = useState([]);
 
   useEffect(() => {
@@ -202,13 +203,48 @@ const Home = ({ classes }) => {
     }
   }, [tourList]);
 
+  const addNewTourHandler = () => {
+    // if (tourList.length >= 4) {
+    //   setLengthAlert(true);
+    // }
+    // console.log('tourList.length');
+    // console.log(tourList.length);
+
+    // window.alert(`length = ${tourList.length}`);
+    if (tourList.length >= 4) {
+      alert.warning('Only 4 tours allowed!');
+    } else {
+      setTourList((oldarr) => [...oldarr, {
+        planet: {
+          name: '',
+          distance: 0,
+        },
+        vehicle: {
+          name: '',
+          total_no: 0,
+          max_distance: 0,
+          speed: 0,
+        },
+      }]);
+    }
+  };
+
+  useEffect(() => {
+    if (lengthAlert) {
+      alert.warning('Length issue........');
+      setLengthAlert(false);
+    }
+  }, [lengthAlert]);
+  // const testclick = () => {
+  //   alert.success('success!');
+  // };
   return (
     <Paper className={classes.paper}>
-      <Grid container>
+      <Grid key={4} container>
+        {/* <Button onClick={testclick}>TESTING</Button> */}
         {tourList.length !== 0 && tourList.map((tour, tourId) => (
           <>
-            <br />
-            <Grid item md={3}>
+            <Grid item md={3} key={`tourList-${tourId}`}>
               <Autocomplete
                 value={tour.vehicle}
                 onChange={(event, newValue) => {
@@ -283,20 +319,7 @@ const Home = ({ classes }) => {
                 // style={tourList.length - 1 === tourId ? {display: 'none'} : {}}
                 color="primary"
                 variant="contained"
-                onClick={() => {
-                  setTourList((oldarr) => [...oldarr, {
-                    planet: {
-                      name: '',
-                      distance: 0,
-                    },
-                    vehicle: {
-                      name: '',
-                      total_no: 0,
-                      max_distance: 0,
-                      speed: 0,
-                    },
-                  }]);
-                }}
+                onClick={addNewTourHandler}
               >
                 <AddIcon />
               </Button>
