@@ -203,6 +203,31 @@ const Home = ({ classes }) => {
     }
   }, [tourList]);
 
+  const reset = () => {
+    setPlanetList(planetList.map((planet) => {
+      planet.position = '';
+      return planet;
+    }));
+
+    setVehicleList(vehicleList.map((vehicle) => {
+      vehicle.position = '';
+      return vehicle;
+    }));
+
+    setTourList([{
+      planet: {
+        name: '',
+        distance: 0,
+      },
+      vehicle: {
+        name: '',
+        total_no: 0,
+        max_distance: 0,
+        speed: 0,
+      },
+    }]);
+  };
+
   const addNewTourHandler = () => {
     // if (tourList.length >= 4) {
     //   setLengthAlert(true);
@@ -329,6 +354,9 @@ const Home = ({ classes }) => {
         ))}
         <Button type="button" onClick={searchClick}>
           Submit
+        </Button>
+        <Button type="button" style={{ marginLeft: '20px' }} onClick={reset}>
+          Reset
         </Button>
       </Grid>
       {/* <Loader size={24} style={{ display: 'none' }} /> */}
