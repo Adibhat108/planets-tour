@@ -22,6 +22,10 @@ const Home = ({ classes }) => {
   const [vehicleList, setVehicleList] = useState([]);
   const [loading, setLoading] = useState(false);
   const alert = useAlert();
+
+  // const [tokenLoading, setTokenLoading] = useState(false);
+  // const [vehicleLoading, setVehicleLoading] = useState(false);
+  // const [planetsLoading, setPlanetsLoading] = useState(false);
   const [tourList, setTourList] = useState([{
     planet: {
       name: '',
@@ -41,6 +45,9 @@ const Home = ({ classes }) => {
   const [, setTotalTime] = useState(0);
   const [lengthAlert, setLengthAlert] = useState(false);
   // const [selectedVehicles, setSelectedVehicles] = useState([]);
+  // const fetchFn = (url, type, successMsg, failureMsg) => {
+  //   fetch(url)
+  // };
 
   useEffect(() => {
     setLoading(true);
@@ -254,6 +261,25 @@ const Home = ({ classes }) => {
     }
   };
 
+  const dropdownChanged = (newValue, tour, tourId, state, setState, stateKey) => {
+    const tempTour = { ...tour };
+    const tempTourList = [...tourList];
+    tempTour[stateKey] = newValue;
+    tempTourList[tourId] = tempTour;
+    setTourList(tempTourList);
+
+    const stateTemp = [...state];
+    const selectedOne = stateTemp.find((stt) => stt.position === tourId);
+    // console.log(selectedOne);
+    if (selectedOne) {
+      selectedOne.position = '';
+      stateTemp[selectedOne.id] = selectedOne;
+    }
+    if (newValue) {
+      stateTemp[newValue.id].position = tourId;
+    }
+    setState(stateTemp);
+  };
   useEffect(() => {
     if (lengthAlert) {
       alert.warning('Length issue........');
@@ -273,24 +299,7 @@ const Home = ({ classes }) => {
               <Autocomplete
                 value={tour.vehicle}
                 onChange={(event, newValue) => {
-                  // setVehicleChosen(newValue);
-                  const tempTour = { ...tour };
-                  const tempTourList = [...tourList];
-                  tempTour.vehicle = newValue;
-                  tempTourList[tourId] = tempTour;
-                  setTourList(tempTourList);
-
-                  const vehiclelistTemp = [...vehicleList];
-                  const selectedOne = vehiclelistTemp.find((vehi) => vehi.position === tourId);
-                  // console.log(selectedOne);
-                  if (selectedOne) {
-                    selectedOne.position = '';
-                    vehiclelistTemp[selectedOne.id] = selectedOne;
-                  }
-                  if (newValue) {
-                    vehiclelistTemp[newValue.id].position = tourId;
-                  }
-                  setVehicleList(vehiclelistTemp);
+                  dropdownChanged(newValue, tour, tourId, vehicleList, setVehicleList, 'vehicle');
                 }}
                 key={`vehicles-autocomplete-${tourId}`}
                 options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId)}
@@ -308,24 +317,7 @@ const Home = ({ classes }) => {
               <Autocomplete
                 value={tour.planet}
                 onChange={(event, newValue) => {
-                  // setPlanetChosen(newValue);
-                  const tempTour = { ...tour };
-                  const tempTourList = [...tourList];
-                  tempTour.planet = newValue;
-                  tempTourList[tourId] = tempTour;
-                  setTourList(tempTourList);
-
-                  const planetlistTemp = [...planetList];
-                  const selectedOne = planetlistTemp.find((planet) => planet.position === tourId);
-                  // console.log(selectedOne);
-                  if (selectedOne) {
-                    selectedOne.position = '';
-                    planetlistTemp[selectedOne.id] = selectedOne;
-                  }
-                  if (newValue) {
-                    planetlistTemp[newValue.id].position = tourId;
-                  }
-                  setPlanetList(planetlistTemp);
+                  dropdownChanged(newValue, tour, tourId, planetList, setPlanetList, 'planet');
                 }}
                 key={`planets-autocomplete-${tourId}`}
                 options={planetList.filter((planet) => (planet.position === '' || planet.position === tourId))}
@@ -352,13 +344,23 @@ const Home = ({ classes }) => {
             </Grid>
           </>
         ))}
-        <Button type="button" onClick={searchClick}>
-          Submit
-        </Button>
-        <Button type="button" style={{ marginLeft: '20px' }} onClick={reset}>
-          Reset
-        </Button>
       </Grid>
+      <Button
+        disabled={tourList.length < 4 || tourList.some((e) => !e.planet.name || !e.vehicle.name)}
+        color="secondary"
+        variant="contained"
+        onClick={searchClick}
+      >
+        Submit
+      </Button>
+      <Button
+        color="secondary"
+        variant="contained"
+        style={{ marginLeft: '20px' }}
+        onClick={reset}
+      >
+        Reset
+      </Button>
       {/* <Loader size={24} style={{ display: 'none' }} /> */}
       <CLoader open={loading} />
       {/* <Alert type="info" message="This is info" isDefaultShown /> */}
