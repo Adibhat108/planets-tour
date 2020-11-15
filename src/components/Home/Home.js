@@ -120,22 +120,8 @@ const Home = ({ classes }) => {
         return res;
       })
       .then((res) => {
-        // const newRes = res.map((rr, i) => {
-        //   rr.id = i;
-        //   rr.position = '';
-        //   return rr;
-        // });
         const newNewRes = [];
         let countTracker = 0;
-        // const vehicleCount = res.reduce((acc, vehicleCurr) => acc + vehicleCurr.total_no, 0);
-        // for (let k = 0; k < res.length; k += 1) {
-        //   for (let i = 0; i < res[k].total_no; i += 1) {
-        //     countTracker += k + i;
-        //     res[k].id = countTracker;
-        //     res[k].position = '';
-        //     newNewRes.push(res[k]);
-        //   }
-        // }
         res.forEach((element) => {
           for (let k = 0; k < element.total_no; k += 1) {
             // const newObj = JSON.parse(JSON.stringify(element));
@@ -236,13 +222,6 @@ const Home = ({ classes }) => {
   };
 
   const addNewTourHandler = () => {
-    // if (tourList.length >= 4) {
-    //   setLengthAlert(true);
-    // }
-    // console.log('tourList.length');
-    // console.log(tourList.length);
-
-    // window.alert(`length = ${tourList.length}`);
     if (tourList.length >= 4) {
       alert.warning('Only 4 tours allowed!');
     } else {
@@ -286,13 +265,9 @@ const Home = ({ classes }) => {
       setLengthAlert(false);
     }
   }, [lengthAlert]);
-  // const testclick = () => {
-  //   alert.success('success!');
-  // };
   return (
     <Paper className={classes.paper}>
       <Grid key={4} container>
-        {/* <Button onClick={testclick}>TESTING</Button> */}
         {tourList.length !== 0 && tourList.map((tour, tourId) => (
           <>
             <Grid item md={3} key={`tourList-${tourId}`}>
@@ -302,7 +277,7 @@ const Home = ({ classes }) => {
                   dropdownChanged(newValue, tour, tourId, vehicleList, setVehicleList, 'vehicle');
                 }}
                 key={`vehicles-autocomplete-${tourId}`}
-                options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId)}
+                options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId || (vehicle?.max_distance >= tour?.planet.distance))}
                 getOptionLabel={(option) => (option.name)}
                 style={{ width: 300 }}
                 renderInput={(params) => (
@@ -320,7 +295,7 @@ const Home = ({ classes }) => {
                   dropdownChanged(newValue, tour, tourId, planetList, setPlanetList, 'planet');
                 }}
                 key={`planets-autocomplete-${tourId}`}
-                options={planetList.filter((planet) => (planet.position === '' || planet.position === tourId))}
+                options={planetList.filter((planet) => planet.position === '' || planet.position === tourId || (planet?.distance >= tour?.vehicle.max_distance))}
                 getOptionLabel={(option) => option.name}
                 style={{ width: 300 }}
                 renderInput={(params) => (
@@ -346,7 +321,7 @@ const Home = ({ classes }) => {
         ))}
       </Grid>
       <Button
-        disabled={tourList.length < 4 || tourList.some((e) => !e.planet.name || !e.vehicle.name)}
+        disabled={tourList.length < 4 || tourList.some((e) => !e.planet?.name || !e.vehicle?.name)}
         color="secondary"
         variant="contained"
         onClick={searchClick}
