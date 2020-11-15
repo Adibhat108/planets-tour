@@ -277,7 +277,7 @@ const Home = ({ classes }) => {
                   dropdownChanged(newValue, tour, tourId, vehicleList, setVehicleList, 'vehicle');
                 }}
                 key={`vehicles-autocomplete-${tourId}`}
-                options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId || (vehicle?.max_distance >= tour?.planet.distance))}
+                options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId)}
                 getOptionLabel={(option) => (option.name)}
                 style={{ width: 300 }}
                 renderInput={(params) => (
@@ -295,7 +295,7 @@ const Home = ({ classes }) => {
                   dropdownChanged(newValue, tour, tourId, planetList, setPlanetList, 'planet');
                 }}
                 key={`planets-autocomplete-${tourId}`}
-                options={planetList.filter((planet) => planet.position === '' || planet.position === tourId || (planet?.distance >= tour?.vehicle.max_distance))}
+                options={planetList.filter((planet) => planet.position === '' || planet.position === tourId)}
                 getOptionLabel={(option) => option.name}
                 style={{ width: 300 }}
                 renderInput={(params) => (
