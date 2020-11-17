@@ -283,7 +283,7 @@ const Home = ({ classes }) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Don't Choose a Vehicle"
+                    label="Choose a Vehicle"
                     variant="outlined"
                   />
                 )}
@@ -301,7 +301,7 @@ const Home = ({ classes }) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Don't Choose a Planet"
+                    label="Choose a Planet"
                     variant="outlined"
                   />
                 )}
