@@ -23,4 +23,4 @@ jobs:
           target_branch: gh-pages
           build_dir: build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_ACTIONS_PIPELINE }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAGES_ACTIONS_PIPELINE }}
