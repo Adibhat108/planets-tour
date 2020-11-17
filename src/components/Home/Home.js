@@ -8,6 +8,8 @@ import {
   Button,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import ReplayIcon from '@material-ui/icons/Replay';
+import TelegramIcon from '@material-ui/icons/Telegram';
 
 import urls from '../../urls';
 import styles from './Home.style';
@@ -278,7 +280,7 @@ const Home = ({ classes }) => {
                 }}
                 key={`vehicles-autocomplete-${tourId}`}
                 options={vehicleList.filter((vehicle) => vehicle.position === '' || vehicle.position === tourId)}
-                getOptionLabel={(option) => (option.name)}
+                getOptionLabel={(option) => (option.name && `${option.name} (Max Distance: ${option.max_distance})`)}
                 style={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField
@@ -296,7 +298,7 @@ const Home = ({ classes }) => {
                 }}
                 key={`planets-autocomplete-${tourId}`}
                 options={planetList.filter((planet) => planet.position === '' || planet.position === tourId)}
-                getOptionLabel={(option) => option.name}
+                getOptionLabel={(option) => (option.name && `${option.name} (Distance: ${option.distance})`)}
                 style={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField
@@ -314,6 +316,7 @@ const Home = ({ classes }) => {
                 onClick={addNewTourHandler}
               >
                 <AddIcon />
+                Add tour
               </Button>
               <br />
             </Grid>
@@ -326,6 +329,7 @@ const Home = ({ classes }) => {
         variant="contained"
         onClick={searchClick}
       >
+        <TelegramIcon />
         Submit
       </Button>
       <Button
@@ -334,6 +338,7 @@ const Home = ({ classes }) => {
         style={{ marginLeft: '20px' }}
         onClick={reset}
       >
+        <ReplayIcon />
         Reset
       </Button>
       {/* <Loader size={24} style={{ display: 'none' }} /> */}
