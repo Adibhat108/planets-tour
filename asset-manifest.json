@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/planets-tour/static/css/main.f8362a9c.chunk.css",
+    "main.js": "/planets-tour/static/js/main.2d758adf.chunk.js",
+    "main.js.map": "/planets-tour/static/js/main.2d758adf.chunk.js.map",
+    "runtime-main.js": "/planets-tour/static/js/runtime-main.0ce5a8f2.js",
+    "runtime-main.js.map": "/planets-tour/static/js/runtime-main.0ce5a8f2.js.map",
+    "static/js/2.bb17df37.chunk.js": "/planets-tour/static/js/2.bb17df37.chunk.js",
+    "static/js/2.bb17df37.chunk.js.map": "/planets-tour/static/js/2.bb17df37.chunk.js.map",
+    "static/js/3.fd3f038f.chunk.js": "/planets-tour/static/js/3.fd3f038f.chunk.js",
+    "static/js/3.fd3f038f.chunk.js.map": "/planets-tour/static/js/3.fd3f038f.chunk.js.map",
+    "index.html": "/planets-tour/index.html",
+    "static/css/main.f8362a9c.chunk.css.map": "/planets-tour/static/css/main.f8362a9c.chunk.css.map",
+    "static/js/2.bb17df37.chunk.js.LICENSE.txt": "/planets-tour/static/js/2.bb17df37.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ce5a8f2.js",
+    "static/js/2.bb17df37.chunk.js",
+    "static/css/main.f8362a9c.chunk.css",
+    "static/js/main.2d758adf.chunk.js"
+  ]
+}
